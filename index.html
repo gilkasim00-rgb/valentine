@@ -24,9 +24,18 @@
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            max-width: 600px;
             position: relative;
         }
+        
+        .main-gif-container {
+            margin-bottom: 20px;
+        }
+        .main-gif-container img {
+            max-width: 200px;
+            border-radius: 15px;
+        }
+
         h1 {
             font-size: 2.5em;
             margin-bottom: 30px;
@@ -41,6 +50,7 @@
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
+            align-items: center;
         }
         button {
             font-size: 1.2em;
@@ -56,9 +66,6 @@
         }
         button:hover {
             transform: scale(1.1);
-        }
-        #yes {
-            font-size: 1.2em;
         }
         #no {
             background: linear-gradient(to bottom, #cccccc, #999999);
@@ -130,16 +137,13 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
-        .pulse {
-            animation: pulse 2s infinite ease-in-out;
-        }
+        .pulse { animation: pulse 2s infinite ease-in-out; }
         @keyframes wiggle {
             0%, 100% { transform: rotate(-5deg); }
             50% { transform: rotate(5deg); }
         }
-        .wiggle {
-            animation: wiggle 1s infinite ease-in-out;
-        }
+        .wiggle { animation: wiggle 1s infinite ease-in-out; }
+
         #continueBtn {
             margin-top: 20px;
             background: linear-gradient(to bottom, #ff66b2, #ff3399);
@@ -153,15 +157,9 @@
             font-size: 1.5em;
         }
 
-        /* Page containers */
-        .page {
-            display: none;
-        }
-        .page.active {
-            display: block;
-        }
+        .page { display: none; }
+        .page.active { display: block; }
 
-        /* Gift selection page */
         .gift-options {
             display: flex;
             flex-direction: column;
@@ -176,37 +174,35 @@
             transition: all 0.3s ease;
             border: 3px solid transparent;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .gift-card:hover {
-            transform: scale(1.05);
-            border-color: #ff66b2;
-            box-shadow: 0 6px 15px rgba(255, 102, 178, 0.3);
-        }
-        .gift-card.selected {
-            border-color: #ff3399;
-            background: linear-gradient(to bottom, #ffe4ec, #ffd6e7);
-        }
-        .gift-icon {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        .gift-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .gift-description {
-            font-size: 0.9em;
-            color: #b35c7e;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
         }
 
-        /* Gift reveal page */
-        .gift-reveal {
-            display: none;
+        .gift-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            filter: grayscale(0.8);
         }
-        .gift-reveal.active {
-            display: block;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
+        .shake { animation: shake 0.3s ease-in-out; }
+
+        .gift-card:not(.locked):hover {
+            transform: scale(1.05);
+            border-color: #ff66b2;
+        }
+        .gift-icon { font-size: 3em; }
+        .gift-title { font-size: 1.3em; font-weight: bold; }
+        .gift-description { font-size: 0.9em; color: #b35c7e; }
+
+        .gift-reveal { display: none; }
+        .gift-reveal.active { display: block; }
+        
         .letter-content {
             background: #fff9fb;
             border-radius: 15px;
@@ -216,7 +212,6 @@
             line-height: 1.8;
             font-size: 1.1em;
             border: 2px dashed #ffb3d9;
-            box-shadow: inset 0 0 10px rgba(255, 179, 217, 0.3);
         }
         .voucher {
             background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 50%, #ffd6e7 100%);
@@ -235,258 +230,204 @@
             font-size: 0.8em;
             color: #ff66b2;
         }
-        .voucher-title {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .voucher-value {
-            font-size: 2em;
-            color: #ff3399;
-            margin: 15px 0;
-        }
-        .voucher-terms {
-            font-size: 0.8em;
-            color: #b35c7e;
-            margin-top: 15px;
-            font-style: italic;
-        }
-        .photo-placeholder {
-            width: 200px;
-            height: 200px;
-            background: #f0f0f0;
+
+        .photo-display {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
             border-radius: 15px;
             margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px dashed #ffb3d9;
-            color: #b35c7e;
-        }
-        .photo-placeholder img {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 12px;
-        }
-        #backBtn {
-            margin-top: 20px;
-            background: linear-gradient(to bottom, #cccccc, #aaaaaa);
-            font-size: 1em;
-            padding: 10px 20px;
-        }
-        #backBtn::before {
-            content: "";
-        }
-        .back-btn {
-            margin-top: 20px;
-            background: linear-gradient(to bottom, #cccccc, #aaaaaa);
-            font-size: 1em;
-            padding: 10px 20px;
+            display: block;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* No limit page */
-        .cat-heart-container {
-            font-size: 5em;
-            margin: 20px 0;
-            animation: heartDrop 2s infinite;
-        }
+        .itinerary-list { text-align: left; margin-top: 15px; }
+        .itinerary-item { margin-bottom: 15px; padding-left: 10px; border-left: 3px solid #ff66b2; }
+        .itinerary-time { font-weight: bold; color: #ff3399; }
+
+        .voucher-terms { font-size: 0.8em; color: #b35c7e; margin-top: 15px; font-style: italic; }
+        .back-btn { margin-top: 20px; background: linear-gradient(to bottom, #cccccc, #aaaaaa); font-size: 1em; padding: 10px 20px; }
+
+        .cat-heart-container { font-size: 5em; margin: 20px 0; animation: heartDrop 2s infinite; }
         @keyframes heartDrop {
             0% { transform: translateY(-10px); }
             50% { transform: translateY(10px); }
             100% { transform: translateY(-10px); }
         }
-        .falling-hearts {
-            position: relative;
-            display: inline-block;
-        }
-        .falling-heart {
-            position: absolute;
-            font-size: 1.5em;
-            animation: fallHeart 2s infinite;
-            opacity: 0;
-        }
-        .falling-heart:nth-child(1) { left: -30px; animation-delay: 0s; }
-        .falling-heart:nth-child(2) { left: 0px; animation-delay: 0.3s; }
-        .falling-heart:nth-child(3) { left: 30px; animation-delay: 0.6s; }
-        .falling-heart:nth-child(4) { left: 60px; animation-delay: 0.9s; }
-        @keyframes fallHeart {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(80px); opacity: 0; }
-        }
-        #tryAgainBtn {
-            margin-top: 30px;
-            background: linear-gradient(to bottom, #ff66b2, #ff3399);
-        }
+        #tryAgainBtn { margin-top: 30px; background: linear-gradient(to bottom, #ff66b2, #ff3399); }
+
+        /* Hidden YouTube Container */
+        #yt-player { position: absolute; top: -1000px; left: -1000px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
     </style>
 </head>
 <body>
-    <!-- Page 1: Valentine Question -->
+
+    <div id="yt-player"></div>
+
     <div class="container page active" id="page1">
+        <div class="main-gif-container" id="main-gif">
+            <img src="https://media.tenor.com/Glt9BXwTqfcAAAAi/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D-%E3%83%8F%E3%83%BC%E3%83%88.gif">
+        </div>
+
         <h1>Nathalia Angeline,<br>Will you be my valentine? 💕</h1>
+
         <div class="buttons" id="buttonsContainer">
-            <button id="yes" class="yes-no">Yes!</button>
-            <button id="no" class="yes-no">No</button>
+            <button id="yes">Yes!</button>
+            <button id="no">No</button>
         </div>
         <div class="message" id="message">Aww, are you sure? Think about all the bunny cuddles! 🐰</div>
         <div class="gif-container" id="gif-container">
             <p style="font-size: 1.5em; margin-bottom: 15px;">Yay! You're my valentine! 💖</p>
             <div class="gif-row">
-                <img src="https://media.giphy.com/media/3oEjHV0z8S7WM4MwnK/giphy.gif" alt="Boy kissing girl GIF" style="max-width: 250px;">
+                <img src="https://media1.tenor.com/m/2ajjELV153UAAAAC/cute-love.gif" style="max-width: 250px;">
             </div>
             <button id="continueBtn">Continue to your gifts! 🎁</button>
         </div>
     </div>
 
-    <!-- Page 2: Gift Selection -->
     <div class="container page" id="page2">
         <h2>Choose your special gift! 🎁💝</h2>
-        <p>Pick one of these lovely surprises I made for you:</p>
         <div class="gift-options">
-            <div class="gift-card" data-gift="letter">
+            <div class="gift-card" data-gift="letter" data-order="1">
                 <div class="gift-icon">💌</div>
-                <div class="gift-title">A Love Letter</div>
-                <div class="gift-description">A romantic letter written just for you</div>
+                <div><div class="gift-title">A Love Letter</div><div class="gift-description">A romantic letter written just for you</div></div>
             </div>
-            <div class="gift-card" data-gift="photo">
+            <div class="gift-card locked" data-gift="photo" data-order="2">
                 <div class="gift-icon">📸</div>
-                <div class="gift-title">Our Photo Voucher</div>
-                <div class="gift-description">A precious memory of us together</div>
+                <div><div class="gift-title">Our Photo Voucher 🔒</div><div class="gift-description">A precious memory of us together</div></div>
             </div>
-            <div class="gift-card" data-gift="hug">
+            <div class="gift-card locked" data-gift="hug" data-order="3">
                 <div class="gift-icon">🤗</div>
-                <div class="gift-title">Unlimited Hugs & Kisses</div>
-                <div class="gift-description">A special voucher redeemable anytime!</div>
+                <div><div class="gift-title">Unlimited Hugs & Kisses 🔒</div><div class="gift-description">A special voucher redeemable anytime!</div></div>
+            </div>
+            <div class="gift-card locked" data-gift="itinerary" data-order="4">
+                <div class="gift-icon">🗓️</div>
+                <div><div class="gift-title">Valentine Date Schedule 🔒</div><div class="gift-description">Our plan for the perfect day</div></div>
             </div>
         </div>
         <button id="backToPage1" class="back-btn">← Back</button>
     </div>
 
-    <!-- Page: Did you say no? -->
     <div class="container page" id="pageNoLimit">
         <h1>Did you say no? 🥺</h1>
         <div class="cat-heart-container">
-            <img src="assets/sad-sticker.gif" alt="Sad sticker" style="max-width: 200px; border-radius: 15px;">
+            <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmg2OHkxMWtqaWdoMXBib21nYm56bDd3dnNka2R2bGphZmtvdXZpOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/4qxibbwHV9u69gPELK/giphy.gif" style="max-width: 200px; border-radius: 15px;">
         </div>
         <p style="font-size: 1.2em; margin-top: 20px;">Please reconsider... 💕</p>
         <button id="tryAgainBtn">Try Again 💖</button>
     </div>
 
-    <!-- Page 3: Gift Reveal -->
     <div class="container page" id="page3">
-        <!-- Letter Gift -->
         <div class="gift-reveal" id="letterGift">
             <h2>💌 Your Love Letter 💌</h2>
             <div class="letter-content">
                 <p>My Dearest Valentine,</p>
                 <p>Every moment with you feels like a beautiful dream I never want to wake up from. Your smile lights up my world brighter than a thousand stars, and your laugh is the sweetest melody my heart has ever known. 💕</p>
-                <p>When I'm with you, everything just makes sense. You're not just my valentine - you're my best friend, my favorite person, and the one who makes my heart do that little flutter thing every single day. 🦋</p>
                 <p>Thank you for being you, for choosing me, and for making every ordinary moment feel extraordinary. I fall more in love with you with each passing day.</p>
-                <p>Forever and always yours,<br>
-                With all my love and bunny cuddles 🐰💖</p>
+                <p>Forever and always yours,<br>With all my love and bunny cuddles 🐰💖</p>
             </div>
-            <button id="backBtn1">← Back to gifts</button>
+            <button class="back-to-gifts back-btn">← Back to gifts</button>
         </div>
 
-        <!-- Photo Gift -->
         <div class="gift-reveal" id="photoGift">
             <h2>📸 Our Special Photo 📸</h2>
             <div class="voucher">
                 <div class="voucher-title">Photo Memory Voucher</div>
-                <div class="photo-placeholder" id="photoPlaceholder">
-                    <span>Your photo will appear here 💕</span>
-                </div>
+                <img src="PASTE_DIRECT_IMAGE_LINK_HERE" class="photo-display" onerror="this.src='https://via.placeholder.com/500x600?text=Paste+Photo+Link+Here'">
                 <p>A moment frozen in time, just for us 💝</p>
                 <div class="voucher-terms">*This memory is valid forever and ever</div>
             </div>
-            <button id="backBtn2">← Back to gifts</button>
+            <button class="back-to-gifts back-btn">← Back to gifts</button>
         </div>
 
-        <!-- Hug & Kiss Gift -->
         <div class="gift-reveal" id="hugGift">
             <h2>🤗 Unlimited Hugs & Kisses 💋</h2>
             <div class="voucher">
                 <div class="voucher-title">Official Love Voucher</div>
-                <div class="voucher-value">∞ UNLIMITED ∞</div>
+                <div style="font-size: 2em; color:#ff3399;">∞ UNLIMITED ∞</div>
                 <p style="font-size: 1.3em;">Hugs 🤗 & Kisses 💋</p>
                 <p>Redeemable anytime, anywhere!</p>
                 <div class="voucher-terms">
                     *No expiration date<br>
                     *Valid 24/7, 365 days a year<br>
-                    *Can be redeemed multiple times per day<br>
-                    *Side effects may include: extreme happiness and warm fuzzy feelings 💕
+                    *Can be redeemed multiple times per day
                 </div>
             </div>
-            <button id="backBtn3">← Back to gifts</button>
+            <button class="back-to-gifts back-btn">← Back to gifts</button>
+        </div>
+
+        <div class="gift-reveal" id="itineraryGift">
+            <h2>🗓️ Our Valentine Schedule 🗓️</h2>
+            <div class="voucher">
+                <div class="voucher-title">Valentine's Day Itinerary</div>
+                <div class="itinerary-list">
+                    <div class="itinerary-item"><span class="itinerary-time">10:00 AM:</span> Pick you up with a surprise 💐</div>
+                    <div class="itinerary-item"><span class="itinerary-time">12:30 PM:</span> Romantic Lunch 🍝</div>
+                    <div class="itinerary-item"><span class="itinerary-time">03:00 PM:</span> Fun Activity 🎡</div>
+                    <div class="itinerary-item"><span class="itinerary-time">07:00 PM:</span> Dinner Date 🕯️</div>
+                </div>
+                <div class="voucher-terms">*Times are flexible as long as I'm with you</div>
+            </div>
+            <button class="back-to-gifts back-btn">← Back to gifts</button>
         </div>
     </div>
 
-    <!-- Floating hearts for cuteness -->
     <div class="heart" style="left: 10%; animation-delay: 0s;">💖</div>
-    <div class="heart" style="left: 20%; animation-delay: 1s;">💕</div>
     <div class="heart" style="left: 70%; animation-delay: 2s;">💗</div>
-    <div class="heart" style="left: 80%; animation-delay: 3s;">💖</div>
-    <div class="heart" style="left: 40%; animation-delay: 1.5s;">💓</div>
-    <div class="heart" style="left: 60%; animation-delay: 2.5s;">💕</div>
-
-    <!-- Background decorations -->
     <div class="bg-decoration pulse" style="top: 10%; left: 5%;">🐰</div>
-    <div class="bg-decoration wiggle" style="top: 15%; right: 8%;">🐕</div>
-    <div class="bg-decoration pulse" style="top: 60%; left: 3%;">❤️</div>
-    <div class="bg-decoration wiggle" style="top: 70%; right: 5%;">🐰</div>
-    <div class="bg-decoration pulse" style="bottom: 15%; left: 8%;">🐕</div>
-    <div class="bg-decoration wiggle" style="bottom: 20%; right: 10%;">💖</div>
-    <div class="bg-decoration" style="top: 40%; left: 2%;">💝</div>
-    <div class="bg-decoration" style="top: 35%; right: 3%;">💗</div>
-    <div class="bg-decoration wiggle" style="bottom: 40%; left: 5%;">🐰</div>
-    <div class="bg-decoration pulse" style="bottom: 45%; right: 4%;">🐕</div>
+    <div class="calendar pulse" style="top: 8%; right: 15%;"><div class="calendar-month">FEB</div><div class="calendar-day">14</div></div>
 
-    <!-- Feb 14 Calendar -->
-    <div class="calendar pulse" style="top: 8%; right: 15%;">
-        <div class="calendar-month">FEB</div>
-        <div class="calendar-day">14</div>
-    </div>
-    <div class="calendar wiggle" style="bottom: 10%; left: 10%;">
-        <div class="calendar-month">FEB</div>
-        <div class="calendar-day">14</div>
-    </div>
-
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Page navigation
+        let player;
+        let currentGiftStep = 1; 
+        const videoId = 'DlexmDDSDZ0'; // Your URL ID
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                height: '1',
+                width: '1',
+                videoId: videoId,
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': videoId
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player loaded and ready to play on button click
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
 
-        // Page 1: Valentine Question
         let noClicks = 0;
         const yesButton = document.getElementById('yes');
         const noButton = document.getElementById('no');
         const message = document.getElementById('message');
         const gifContainer = document.getElementById('gif-container');
         const buttonsContainer = document.getElementById('buttonsContainer');
+        const mainGif = document.getElementById('main-gif');
 
-        // Progressive "No" button messages
-        const noMessages = [
-            "Are you sure?",
-            "Really sure?",
-            "Are you positive?",
-            "Pleassee",
-            "Don't do thisss",
-            "Huaaa",
-            "Ayanggg :((",
-            "Last chance ayanggg :(("
-        ];
+        const noMessages = ["Are you sure?", "Really sure?", "Are you positive?", "Pleassee", "Don't do thisss", "Huaaa", "Ayanggg :((", "Last chance ayanggg :(("];
 
         noButton.addEventListener('click', () => {
             noClicks++;
             if (noClicks > 8) {
-                // Show the "Did you say no?" page on 9th click
                 showPage('pageNoLimit');
             } else {
                 const newSize = 1.2 + (noClicks * 0.3);
                 yesButton.style.fontSize = `${newSize}em`;
                 yesButton.style.padding = `${15 + (noClicks * 5)}px ${30 + (noClicks * 10)}px`;
-                // Update button text with progressive message
                 noButton.textContent = noMessages[noClicks - 1];
                 message.style.display = 'block';
             }
@@ -495,47 +436,63 @@
         yesButton.addEventListener('click', () => {
             buttonsContainer.style.display = 'none';
             message.style.display = 'none';
+            mainGif.style.display = 'none'; 
             gifContainer.style.display = 'block';
+            
+            // Start the YouTube Music
+            if (player && player.playVideo) {
+                player.playVideo();
+            }
         });
 
-        // Continue to gifts page
-        document.getElementById('continueBtn').addEventListener('click', () => {
-            showPage('page2');
-        });
+        document.getElementById('continueBtn').addEventListener('click', () => showPage('page2'));
 
-        // Page 2: Gift Selection
         document.querySelectorAll('.gift-card').forEach(card => {
             card.addEventListener('click', () => {
-                const gift = card.dataset.gift;
-                showPage('page3');
-
-                // Hide all gift reveals
-                document.querySelectorAll('.gift-reveal').forEach(g => g.classList.remove('active'));
-
-                // Show selected gift
-                if (gift === 'letter') {
-                    document.getElementById('letterGift').classList.add('active');
-                } else if (gift === 'photo') {
-                    document.getElementById('photoGift').classList.add('active');
-                } else if (gift === 'hug') {
-                    document.getElementById('hugGift').classList.add('active');
+                const order = parseInt(card.dataset.order);
+                if (order <= currentGiftStep) {
+                    const giftId = card.dataset.gift;
+                    showPage('page3');
+                    document.querySelectorAll('.gift-reveal').forEach(g => g.classList.remove('active'));
+                    document.getElementById(giftId + 'Gift').classList.add('active');
+                    if (order === currentGiftStep) {
+                        currentGiftStep++;
+                        updateGiftLocks();
+                    }
+                } else {
+                    card.classList.add('shake');
+                    setTimeout(() => card.classList.remove('shake'), 300);
                 }
             });
         });
 
-        // Back buttons
-        document.getElementById('backBtn1').addEventListener('click', () => showPage('page2'));
-        document.getElementById('backBtn2').addEventListener('click', () => showPage('page2'));
-        document.getElementById('backBtn3').addEventListener('click', () => showPage('page2'));
-        document.getElementById('backToPage1').addEventListener('click', () => showPage('page1'));
+        function updateGiftLocks() {
+            document.querySelectorAll('.gift-card').forEach(card => {
+                const order = parseInt(card.dataset.order);
+                if (order <= currentGiftStep) {
+                    card.classList.remove('locked');
+                    const title = card.querySelector('.gift-title');
+                    title.textContent = title.textContent.replace(' 🔒', '');
+                }
+            });
+        }
 
-        // Try again button - resets noClicks and goes back to page 1
+        document.getElementById('backToPage1').addEventListener('click', () => {
+            mainGif.style.display = 'none'; 
+            showPage('page1');
+        });
+
+        document.querySelectorAll('.back-to-gifts').forEach(btn => {
+            btn.addEventListener('click', () => showPage('page2'));
+        });
+
         document.getElementById('tryAgainBtn').addEventListener('click', () => {
             noClicks = 0;
             yesButton.style.fontSize = '1.2em';
             yesButton.style.padding = '15px 30px';
             noButton.textContent = 'No';
             message.style.display = 'none';
+            mainGif.style.display = 'block'; 
             showPage('page1');
         });
     </script>
