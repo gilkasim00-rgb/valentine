@@ -28,8 +28,51 @@
             position: relative;
         }
         
+        /* New Letter Page Styles */
+        #letterPage {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #letterPage:hover { transform: scale(1.05); }
+        .envelope-wrapper {
+            position: relative;
+            width: 250px;
+            height: 150px;
+            background-color: #fff;
+            margin: 0 auto 20px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .envelope-wrapper::before {
+            content: "";
+            position: absolute;
+            top: -80px;
+            left: 0;
+            border-left: 125px solid transparent;
+            border-right: 125px solid transparent;
+            border-bottom: 80px solid #f9f9f9;
+        }
+        .wax-seal {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(#ff4d6d, #c9184a);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 2px solid #a4133c;
+        }
+
         .main-gif-container {
             margin-bottom: 20px;
+            min-height: 200px; /* Prevents jumping when gif changes */
         }
         .main-gif-container img {
             max-width: 200px;
@@ -265,9 +308,17 @@
 
     <div id="yt-player"></div>
 
-    <div class="container page active" id="page1">
+    <div class="container page active" id="letterPage" onclick="openLetter()">
+        <div class="envelope-wrapper">
+            <div class="wax-seal">❤</div>
+        </div>
+        <h1>Letter for Nathalia Angeline 🥰💖</h1>
+        <p style="color: #ff85a2;">(Click the letter to open it with love)</p>
+    </div>
+
+    <div class="container page" id="page1">
         <div class="main-gif-container" id="main-gif">
-            <img src="https://media.tenor.com/Glt9BXwTqfcAAAAi/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D-%E3%83%8F%E3%83%BC%E3%83%88.gif">
+            <img id="question-gif" src="https://media.tenor.com/Glt9BXwTqfcAAAAi/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D-%E3%83%8F%E3%83%BC%E3%83%88.gif">
         </div>
 
         <h1>Nathalia Angeline,<br>Will you be my valentine? 💕</h1>
@@ -322,10 +373,22 @@
         <div class="gift-reveal" id="letterGift">
             <h2>💌 Your Love Letter 💌</h2>
             <div class="letter-content">
-                <p>My Dearest Valentine,</p>
-                <p>Every moment with you feels like a beautiful dream I never want to wake up from. Your smile lights up my world brighter than a thousand stars, and your laugh is the sweetest melody my heart has ever known. 💕</p>
-                <p>Thank you for being you, for choosing me, and for making every ordinary moment feel extraordinary. I fall more in love with you with each passing day.</p>
-                <p>Forever and always yours,<br>With all my love and bunny cuddles 🐰💖</p>
+                <p>My Love,</p>
+                <p>It hasn’t even been two months, but somehow it feels like we’ve lived a lot already.
+We’ve had ups and downs, we’ve cried, we’ve hurt each other without meaning to (Mostly meee, maaf ayangg huaaa :sad:) — and yet, we’re still here. Still choosing each other, hopefully ayang juga. Still trying. And that matters to me more than anything.💕</p>
+                <p>I don’t want something easy.
+I want something real.
+Something we fight for, even when it’s hard.
+And I promise you, no matter what comes our way, I won’t give up on us.</p>
+                          <p>Thank you for being you.
+Thank you for choosing me, for trusting me, and for making even the most ordinary moments feel extraordinary. Somehow, every day, I find myself falling more in love with you — quietly, deeply, and honestly. My Love meter has not and will not ever decrease</p>
+              
+           <p>   This is my very first Valentine’s with anyone, and there’s no one else I would want to share it with but you.
+
+So this is me, with all my heart, asking you:
+
+Will you be my Valentine?</p>
+                <p>Forever and always yours,<br> Bibin 🐶💖</p>
             </div>
             <button class="back-to-gifts back-btn">← Back to gifts</button>
         </div>
@@ -334,7 +397,7 @@
             <h2>📸 Our Special Photo 📸</h2>
             <div class="voucher">
                 <div class="voucher-title">Photo Memory Voucher</div>
-                <img src="PASTE_DIRECT_IMAGE_LINK_HERE" class="photo-display" onerror="this.src='https://via.placeholder.com/500x600?text=Paste+Photo+Link+Here'">
+                <img src="Valentine Date.png" class="photo-display" onerror="this.src='https://via.placeholder.com/500x600?text=Paste+Photo+Link+Here'">
                 <p>A moment frozen in time, just for us 💝</p>
                 <div class="voucher-terms">*This memory is valid forever and ever</div>
             </div>
@@ -362,10 +425,10 @@
             <div class="voucher">
                 <div class="voucher-title">Valentine's Day Itinerary</div>
                 <div class="itinerary-list">
-                    <div class="itinerary-item"><span class="itinerary-time">10:00 AM:</span> Pick you up with a surprise 💐</div>
-                    <div class="itinerary-item"><span class="itinerary-time">12:30 PM:</span> Romantic Lunch 🍝</div>
-                    <div class="itinerary-item"><span class="itinerary-time">03:00 PM:</span> Fun Activity 🎡</div>
-                    <div class="itinerary-item"><span class="itinerary-time">07:00 PM:</span> Dinner Date 🕯️</div>
+                    <div class="itinerary-item"><span class="itinerary-time">10:00 AM:</span> Meet up & Surprise </div>
+                    <div class="itinerary-item"><span class="itinerary-time">12:00 PM:</span> Romantic Lunch at bibin apt 🍝</div>
+                    <div class="itinerary-item"><span class="itinerary-time">02:00 PM:</span> Fun Secret Activity 🎡</div>
+                    <div class="itinerary-item"><span class="itinerary-time">06:00 PM:</span> Dinner Date at the The Cobbs Bistro (4 courses, ada 1 course favorit ayang) </div>
                 </div>
                 <div class="voucher-terms">*Times are flexible as long as I'm with you</div>
             </div>
@@ -382,27 +445,21 @@
     <script>
         let player;
         let currentGiftStep = 1; 
-        const videoId = 'DlexmDDSDZ0'; // Your URL ID
+        const videoId = 'DlexmDDSDZ0'; 
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
-                height: '1',
-                width: '1',
-                videoId: videoId,
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': videoId
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
+                height: '1', width: '1', videoId: videoId,
+                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': videoId }
             });
         }
 
-        function onPlayerReady(event) {
-            // Player loaded and ready to play on button click
+        // 2. Start Music when Letter is opened
+        function openLetter() {
+            showPage('page1');
+            if (player && player.playVideo) {
+                player.playVideo();
+            }
         }
 
         function showPage(pageId) {
@@ -417,19 +474,40 @@
         const gifContainer = document.getElementById('gif-container');
         const buttonsContainer = document.getElementById('buttonsContainer');
         const mainGif = document.getElementById('main-gif');
+        const questionGif = document.getElementById('question-gif');
+
+        const originalGifUrl = "https://media.tenor.com/Glt9BXwTqfcAAAAi/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D-%E3%83%8F%E3%83%BC%E3%83%88.gif";
+        
+        // 3. Gift Sequence for No Button
+        const noGifs = [
+            "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aXphdTVkeXJtcWNnOTVsMWo1ZGxjZXQwNW8ydzc5emxsYW1wd3VpZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/DvPs8bSUHLvHWiARQV/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGF2bG9zNTJpZWVndGRmaHJlN291YTBoZDdvNGs3OGI5bXA5NXYzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/aZ4sQUpybai5y/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGF2bG9zNTJpZWVndGRmaHJlN291YTBoZDdvNGs3OGI5bXA5NXYzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/K6WIhJ07gwGkIAQfwN/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGF2bG9zNTJpZWVndGRmaHJlN291YTBoZDdvNGs3OGI5bXA5NXYzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/zZbf6UpZslp3nvFjIR/giphy.gif",
+            "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWNibXZwbWRrdGdmMmE1MmQ0ODg1amZ0NmN1MGZ2andiMGd3NWtoMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AOitRwIgx2wcOxZaIH/giphy.gif",
+            "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJtZWpkMWFia2JzbTFzeHB3ZndlNmVkcjFwYWhseDU5ajJrbDNzdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4zUmRD2x9vl06ltMXd/giphy.gif",
+            "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3pwa3FweHhhZ2ZrZWdzczlqcnFhd2Ryenk5eHFrNDV4NGkwMGNndCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WietRdLChKPzzd4Jc7/giphy.gif",
+            "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyaWJsbmhxd3I0dWFreGo0Mnpwd283bGd2NmRseTNlbDRmZTc5d2loNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/lR3pWtb80Hz22UjrYj/giphy.gif"
+        ];
 
         const noMessages = ["Are you sure?", "Really sure?", "Are you positive?", "Pleassee", "Don't do thisss", "Huaaa", "Ayanggg :((", "Last chance ayanggg :(("];
 
         noButton.addEventListener('click', () => {
-            noClicks++;
-            if (noClicks > 8) {
-                showPage('pageNoLimit');
-            } else {
+            if (noClicks < 8) {
+                // Change GIF
+                questionGif.src = noGifs[noClicks];
+                
+                // Scale Yes Button
                 const newSize = 1.2 + (noClicks * 0.3);
                 yesButton.style.fontSize = `${newSize}em`;
                 yesButton.style.padding = `${15 + (noClicks * 5)}px ${30 + (noClicks * 10)}px`;
-                noButton.textContent = noMessages[noClicks - 1];
+                
+                // Change Message and Text
+                noButton.textContent = noMessages[noClicks];
                 message.style.display = 'block';
+                noClicks++;
+            } else {
+                showPage('pageNoLimit');
             }
         });
 
@@ -438,11 +516,6 @@
             message.style.display = 'none';
             mainGif.style.display = 'none'; 
             gifContainer.style.display = 'block';
-            
-            // Start the YouTube Music
-            if (player && player.playVideo) {
-                player.playVideo();
-            }
         });
 
         document.getElementById('continueBtn').addEventListener('click', () => showPage('page2'));
@@ -478,7 +551,7 @@
         }
 
         document.getElementById('backToPage1').addEventListener('click', () => {
-            mainGif.style.display = 'none'; 
+            resetQuestionPage();
             showPage('page1');
         });
 
@@ -487,14 +560,21 @@
         });
 
         document.getElementById('tryAgainBtn').addEventListener('click', () => {
+            resetQuestionPage();
+            showPage('page1');
+        });
+
+        function resetQuestionPage() {
             noClicks = 0;
             yesButton.style.fontSize = '1.2em';
             yesButton.style.padding = '15px 30px';
             noButton.textContent = 'No';
             message.style.display = 'none';
-            mainGif.style.display = 'block'; 
-            showPage('page1');
-        });
+            mainGif.style.display = 'block';
+            buttonsContainer.style.display = 'flex';
+            gifContainer.style.display = 'none';
+            questionGif.src = originalGifUrl;
+        }
     </script>
 </body>
 </html>
